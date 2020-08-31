@@ -1,0 +1,51 @@
+.todo {
+  border-top: 1px solid #dde4f7;
+  padding: 1.5rem;
+  display: grid;
+  grid-gap: 2px;
+  grid-template-columns: min-content auto min-content min-content;
+  background: white;
+  position: relative;
+}
+
+.todo:last-child {
+  border-radius: 0 0 5px 5px;
+}
+
+.todo.is-done {
+  background: rgba(255,255,255,0.8);
+  .todo-title span:first-child {
+    text-decoration: line-through;
+  }
+  .todo-completed {
+    color: #48c774;
+  }
+}
+
+.done-todo-fld {
+  align-self: center;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.todo-title{
+  align-self: center;
+  margin: 0; padding: 0;
+  margin-left: 1rem;
+}
+
+.edit-todo {
+position: absolute;
+z-index: 2;
+top: 0; left: 0;
+padding: 1.5rem;
+width: 100%;
+background: #eee9bb;
+display: grid;
+grid-gap: 2px;
+grid-template-columns: auto min-content min-content;
+
+select {
+  width: 100%;
+}
+}

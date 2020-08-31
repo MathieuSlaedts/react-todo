@@ -1,0 +1,15 @@
+@import "~bulma/bulma";
+
+html {
+  min-height: 100%;
+  background: #dde4f7;
+}
+body {
+  padding: 5rem;
+}
+
+.App {
+@extend .container;
+}
+
+
