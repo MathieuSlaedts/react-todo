@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import "./TodoItem.scss";
 
 export default class TodoItem extends Component {
-  state = {
-    displayEditTodoFld: false
-  };
   render() {
     return (
       <li className={`todo ${this.props.todo.done === true ? "is-done" : ""}`}>
@@ -51,36 +48,46 @@ export default class TodoItem extends Component {
 
   /* CUSTOM METHODS */
 
+  /*
+   * Mark a todo as "completed" or not
+   * Pass the Id of the todo and new "done" state to parent (todolist.js)
+   */
   handleDone = (ev) => {
     const todoId = this.props.todo.id;
     const newDoneState = !this.props.todo.done;
     this.props.handleDone(todoId, newDoneState);
   };
 
+  /*
+   * delete a todo
+   * Pass the id If the todo to parent (todolist.js)
+   */
   handleDelete = (ev) => {
     ev.preventDefault();
     const todoId = this.props.todo.id;
     this.props.handleDelete(todoId);
   };
 
+  /*
+   * Edit the title of a todo
+   * Pass the Id  of the todo and the new title to parent (todolist.js)
+   * Display / Hide the Edit form of a todo
+   */
   handleEdit = (ev) => {
-    console.log("test");
     ev.preventDefault();
     const todoId = this.props.todo.id;
     const newTodoTitle = ev.target.editTodoFld.value;
-    console.log(newTodoTitle);
     this.props.handleEdit(todoId, newTodoTitle);
     this.handleEditBtn(ev);
   };
 
+  /*
+   * Show / Hide the Edit form of a todo
+   * Pass the Id of the todo to parent (todolist.js)
+   */
   handleEditBtn = (ev) => {
     ev.preventDefault();
     const todoId = this.props.todo.id;
     this.props.handleEditBtn(todoId);
-    //this.permuteDisplayEditTodoFld();
   };
-
-  /* noSubmit = (ev) => {
-    ev.preventDefault();
-  }; */
 }

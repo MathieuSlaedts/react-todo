@@ -32,6 +32,10 @@ export default class SortTodos extends Component {
     );
   }
 
+  /*
+   * Add a new todo
+   * Pass the mainSort and completionSort values to parent (App.js)
+   */
   handleSort = (ev) => {
     ev.preventDefault();
     const mainSort = ev.target.mainSort.value;

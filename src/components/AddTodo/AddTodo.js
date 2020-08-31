@@ -17,6 +17,10 @@ export default class Addtodo extends Component {
 
   /* CUSTOM METHODS */
 
+  /*
+   * Add a new todo
+   * Pass the new todo to parent (App.js)
+   */
   handleSumbit = (ev) => {
     ev.preventDefault();
     const newPosition = ++this.props.lastPosition;

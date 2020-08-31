@@ -61,6 +61,10 @@ export default class App extends Component {
 
   /* CUSTOM METHODS */
 
+  /*
+   * Add a new todo
+   * Push the new todo in the todos array (in the state)
+   */
   newTodo = (newTodo, newPosition) => {
     this.setState({
       todos: [newTodo, ...this.state.todos],
@@ -68,12 +72,20 @@ export default class App extends Component {
     });
   };
 
+  /*
+   * Delete a todo
+   * Remove the todo from the todos array (in the state)
+   */
   deleteTodo = (todoId) => {
     this.setState({
       todos: this.state.todos.filter((el) => el.id !== todoId)
     });
   };
 
+  /*
+   * Mark a todo as "completed" or not
+   * Update the "done" value of the todo in the todos array (in the state)
+   */
   todoDone = (todoId, newDoneState) => {
     let todos = [...this.state.todos].map((el) => {
       if (el.id === todoId) el.done = newDoneState;
@@ -82,6 +94,10 @@ export default class App extends Component {
     this.setState({ todos: [...todos] });
   };
 
+  /*
+   * Edit a todo
+   * Update the "title" value of the todo in the todos array (in the state)
+   */
   editTodo = (todoId, newTodoTitle) => {
     let todos = [...this.state.todos].map((el) => {
       if (el.id === todoId) el.title = newTodoTitle;
@@ -90,6 +106,10 @@ export default class App extends Component {
     this.setState({ todos: [...todos] });
   };
 
+  /*
+   * Show / Hide the Edit form of a todo
+   * Update the "isEditing" value of the todo in the todos array (in the state)
+   */
   isEditing = (todoId) => {
     console.log(todoId);
     let todos = [...this.state.todos].map((el) => {
@@ -100,10 +120,15 @@ export default class App extends Component {
     this.setState({ todos: [...todos] });
   };
 
+  /*
+   * Sort todos
+   * Update the todos array (in the state)
+   */
   sortTodos = (mainSort, completionSort) => {
     console.log(mainSort, completionSort);
     let todos = [...this.state.todos];
 
+    // Sort todos by...
     if (mainSort !== "") {
       switch (mainSort) {
         case "addition":
@@ -122,6 +147,7 @@ export default class App extends Component {
       }
     }
 
+    // Sort todos by completion...
     if (completionSort !== "") {
       const todosCompleted = todos.filter((el) => el.done === true);
       const todosUncompleted = todos.filter((el) => el.done === false);
