@@ -5,11 +5,35 @@ html {
   background: #dde4f7;
 }
 body {
-  padding: 5rem;
+  //padding: 5rem;
 }
 
 .App {
 @extend .container;
+}
+
+nav {
+  background: #363636;
+  margin-bottom: 3rem;
+
+  ul {
+    display: flex;
+    padding: 1rem;
+    justify-content: flex-end;
+  }
+
+  li {
+    padding: 0 .5rem;
+  }
+
+  a {
+    color: white;
+    text-decoration: underline;
+
+    &:hover {
+      color: #dde4f7;
+    }
+  }
 }
 
 

@@ -17,6 +17,9 @@ export default class TodoItem extends Component {
           {this.props.todo.done === true && (
             <span className="todo-completed"> Completed!</span>
           )}
+          {this.props.todo.user !== undefined && this.props.todo.user !== "" && (
+          <span className="todo-user"> | Asigned to {this.props.todo.user}</span>
+          )}
         </p>
         <form
           className={`edit-todo ${

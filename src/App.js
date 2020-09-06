@@ -1,26 +1,38 @@
 import React, { Component } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import "./styles.scss";
 import AddTodo from "./components/AddTodo/AddTodo";
 import SortTodos from "./components/SortTodos/SortTodos";
 import TodoList from "./components/TodoList/TodoList";
+import Users from "./components/Users/Users";
 
 export default class App extends Component {
   state = {
     lastPosition: 3,
+    users: [
+      'Mathieu', 'Benoit', 'Michel', "Jack"
+    ],
     todos: [
       {
         id: "zefegtertye(",
         title: "Cette todo a la position 0",
         done: true,
         position: 0,
-        isEditing: true
+        isEditing: false,
+        user: 'Mathieu'
       },
       {
         id: "sfqfefsfsfaefe",
         title: "Position 3 pour cette todo",
         done: false,
         position: 3,
-        isEditing: false
+        isEditing: false,
+        user: ''
       },
       {
         id: "dqdacsqfrtzge",
@@ -41,21 +53,39 @@ export default class App extends Component {
 
   render() {
     return (
+      <Router>
+      <nav><ul>
+        <li><Link to="/">Todos</Link></li>
+        <li><Link to="/users">Users</Link></li>
+      </ul></nav>
       <div className="App">
-        <h1 className="title is-2 has-text-centered">Todo list</h1>
-        <AddTodo
-          newTodo={this.newTodo}
-          lastPosition={this.state.lastPosition}
-        />
-        <SortTodos sortTodos={this.sortTodos} />
-        <TodoList
-          todos={this.state.todos}
-          todoDone={this.todoDone}
-          deleteTodo={this.deleteTodo}
-          editTodo={this.editTodo}
-          isEditing={this.isEditing}
-        />
+        <Switch>
+          <Route exact path="/">
+
+        <h1 className="title is-2 has-text-centered">Todos</h1>
+            <AddTodo
+              newTodo={this.newTodo}
+              users={this.state.users}
+              lastPosition={this.state.lastPosition}
+            />
+            <SortTodos sortTodos={this.sortTodos} />
+            <TodoList
+              todos={this.state.todos}
+              todoDone={this.todoDone}
+             deleteTodo={this.deleteTodo}
+              editTodo={this.editTodo}
+              isEditing={this.isEditing}
+            />
+          </Route>
+          <Route exact path="/users">
+
+        <h1 className="title is-2 has-text-centered">Users</h1>
+            <Users users={this.state.users} />
+          </Route>
+        </Switch>
       </div>
+
+        </Router>
     );
   }
 
@@ -124,13 +154,12 @@ export default class App extends Component {
    * Sort todos
    * Update the todos array (in the state)
    */
-  sortTodos = (mainSort, completionSort) => {
-    console.log(mainSort, completionSort);
+  sortTodos = (orderType) => {
     let todos = [...this.state.todos];
 
     // Sort todos by...
-    if (mainSort !== "") {
-      switch (mainSort) {
+    if (orderType !== "") {
+      switch (orderType) {
         case "addition":
           todos.sort((a, b) => (a.position > b.position ? 1 : -1));
           break;
@@ -142,21 +171,6 @@ export default class App extends Component {
           break;
         case "unalphabetical":
           todos.sort((a, b) => b.title.localeCompare(a.title));
-          break;
-        default:
-      }
-    }
-
-    // Sort todos by completion...
-    if (completionSort !== "") {
-      const todosCompleted = todos.filter((el) => el.done === true);
-      const todosUncompleted = todos.filter((el) => el.done === false);
-      switch (completionSort) {
-        case "completed":
-          todos = [...todosCompleted, ...todosUncompleted];
-          break;
-        case "uncompleted":
-          todos = [...todosUncompleted, ...todosCompleted];
           break;
         default:
       }
